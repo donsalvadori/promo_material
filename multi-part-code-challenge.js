@@ -165,25 +165,18 @@ function handleArray(array, target, n) {
 }
 
 
-//passing in carsMapped (capacity) and original cargo
-function full (capacityArray,carArray, cargo){
+//passing in carsArray (capacity) and original cargo
 
+function full (carArray){
+    var cap = 0;
+    for (var i in carArray) {
+        cap += carArray[i].capacity * carArray[i].length;
+    }
+    return console.log(cap);
 }
 
 
-
-
-//option hash to get rid of so many arguments in tally fx
-
-var options = {
-    n1: null
-    n2: null,
-    n3: null,
-    n4: null,
-    n5: null
-}
-
-//parent function
+//parent function, data is a hash of values for # of cars
 
 function tally(data, cargo) {
     var sportArray = [];
@@ -196,18 +189,14 @@ function tally(data, cargo) {
     var parsed = [];
     var names = [];
 
-    var n1 = data.n1;
-    var n2 = data.n2;
-    var n3 = data.n3;
-    var n4 = data.n4;
-    var n5 = data.n5;
+    // var normalizedCargo = (cargo / 100);
 
     //buids out my objects based on helper function above
-    handleArray(sportArray,SportsCar, n1);
-    handleArray(familyArray,FamilyCar, n2);
-    handleArray(truckArray,Truck, n3);
-    handleArray(miniArray,MiniVan, n4);
-    handleArray(cargoArray,CargoVan, n5);
+    handleArray(sportArray,SportsCar, data.n1);
+    handleArray(familyArray,FamilyCar, data.n2);
+    handleArray(truckArray,Truck, data.n3);
+    handleArray(miniArray,MiniVan, data.n4);
+    handleArray(cargoArray,CargoVan, data.n5);
 
 
     //storing all the cars together in mega array
@@ -224,16 +213,13 @@ function tally(data, cargo) {
 
 
     // strggling hard core here maybe revise OO properties to make easier?
-    // var test = full(carsMapped, cargo);
 
-    // console.log();
-
-
+    full(carArray);
 
 
     //now for the printing finale!!!!
     console.log("Allocating " + startCargo + " LB of cargo in total");
-
+    //refactor into print fx
     for(var i = 0; i < carArray.length; i++) {
        names.push(carArray[i].type);
        parsed.push(carArray[i].capacity);
@@ -244,11 +230,11 @@ function tally(data, cargo) {
 
 
 // //test output
-tally(1,3,4,2,1, 7356);
-// tally(1, 6, 1, 2, 3, 7356);
 
-// // tally(1,1,1,1,1);
-// // tally(0,0,1,0,0);
+tally({n1: 1, n2: 3, n3: 4, n4: 2, n5: 1}, 7356);
+// tally({n1: 1, n2: 6, n3: 1, n4: 2, n5: 3}, 7356);
+// tally({n1: 1, n2: 1, n3: 1, n4: 1, n5: 1}, 1);
+// tally({n1: 0, n2: 0, n3: 1, n4: 0, n5: 0}, 0);
 
 
 
